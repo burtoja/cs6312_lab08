@@ -32,7 +32,7 @@ public class RealEstate {
 	 */
 	public RealEstate(String location, int landArea, int structureArea) {
 		if (location == null) {
-			throw new NullPointerException("Month cannot be null.");
+			throw new IllegalArgumentException("Month cannot be null.");
 		}
 		if (location.length() < 2) {
 			throw new IllegalArgumentException("Location description must have at least two characters.");
@@ -52,7 +52,7 @@ public class RealEstate {
 	 * This method will return a string representation of the RealEstate location
 	 * and areas
 	 * 
-	 * @return string representation of object variables
+	 * @return string representation of RealEstate object variables
 	 *
 	 * @precondition none
 	 *
