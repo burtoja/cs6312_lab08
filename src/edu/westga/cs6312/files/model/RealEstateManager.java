@@ -1,6 +1,7 @@
 package edu.westga.cs6312.files.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * This class will manage the currently listed RealEstate objects
@@ -51,6 +52,18 @@ public class RealEstateManager {
 	 */
 	public ArrayList<RealEstate> getProperties() {
 		return this.listedRealEstate;
+	}
+	
+	/**
+	 * 
+	 * 
+	 *
+	 * @precondition
+	 *
+	 * @postcondition
+	 */
+	public void sortProperties() {
+		Collections.sort(this.listedRealEstate);
 	}
 
 	/**
