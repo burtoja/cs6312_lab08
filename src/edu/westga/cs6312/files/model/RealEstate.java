@@ -9,7 +9,7 @@ package edu.westga.cs6312.files.model;
  *
  */
 
-public class RealEstate {
+public class RealEstate implements Comparable<RealEstate> {
 	private String location;
 	private int landArea;
 	private int structureArea;
@@ -83,6 +83,80 @@ public class RealEstate {
 			throw new IllegalArgumentException("Total structure area excedes land area available");
 		}
 		this.structureArea += structureArea;
+	}
+
+	/**
+	 * Gets the location name of the property
+	 * 
+	 * @return location name of the property
+	 *
+	 * @precondition none
+	 *
+	 * @postcondition no change to object
+	 */
+	public String getLocation() {
+		return this.location;
+	}
+
+	/**
+	 * Gets the land area of the property
+	 * 
+	 * @return land area of the property
+	 * 
+	 * @precondition none
+	 *
+	 * @postcondition no change to object
+	 */
+	public int getLandArea() {
+		return this.landArea;
+	}
+
+	/**
+	 * Gets the structure area of the property
+	 * 
+	 * @return structure area of the property
+	 *
+	 * @precondition none
+	 *
+	 * @postcondition no change to object
+	 */
+	public int getStructureArea() {
+		return this.structureArea;
+	}
+
+	/**
+	 * This method compares this RealEstate object based on land area followed by
+	 * structure area followed by location name with all compared with ascending
+	 * order
+	 *  
+	 * @param propertyToCompare the RealEstate object to compare to this RealEstate
+	 *                          object
+	 * 
+	 * @return -1 if this lower in sort value, 0 if this object is of equal
+	 *         sort value, or 1 if this object is greater in sort value
+	 *
+	 * @precondition propertyToCompare must be a valid RealEstate object
+	 *
+	 * @postcondition no changes to either object
+	 * 
+	 */
+	@Override
+	public int compareTo(RealEstate propertyToCompare) {
+		int returnValue = 0;
+		if (this.getLandArea() > propertyToCompare.getLandArea()) {
+			returnValue = 1;
+		} else if (this.getLandArea() < propertyToCompare.getLandArea()) {
+			returnValue = -1;
+		} else if (this.getStructureArea() > propertyToCompare.getStructureArea()) {
+			returnValue = 1;
+		} else if (this.getStructureArea() < propertyToCompare.getStructureArea()) {
+			returnValue = -1;
+		} else if (this.getLocation().compareTo(propertyToCompare.getLocation()) < 0) {
+			returnValue = -1;
+		} else if (this.getLocation().compareTo(propertyToCompare.getLocation()) > 0) {
+			returnValue = 1;
+		}
+		return returnValue;
 	}
 
 }
