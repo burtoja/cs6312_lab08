@@ -112,6 +112,32 @@ public class RealEstateTUI {
 		} while (!isValid);
 		return userInteger;
 	}
+	
+	/**
+	 * Prompts user for a to enter a String based upon the message delivered in the
+	 * parameter. This method will continue to prompt the user for the String until
+	 * a String with at least 1 character is entered.
+	 * 
+	 * @return	String entered by user
+	 *
+	 * @precondition	none
+	 *	
+	 * @postcondition	no change to object
+	 */
+	private String getStringFromUser(String message) {
+		boolean isValid = false;
+		String fileName;
+		do {
+			System.out.println(message);
+			fileName = this.userInput.nextLine();
+			if (fileName.length() > 0) {
+				isValid = true;
+			} else {
+				System.out.println("You did not enter any text.  Please try again.");
+			}
+		} while (!isValid);
+		return fileName;
+	}
 
 	/**
 	 * This method will add the real estate properties from a file supplied by the
@@ -123,16 +149,20 @@ public class RealEstateTUI {
 	 * @postcondition
 	 */
 	private void addPropertiesFromFile() {
-		String fileName = getStringFromUser("Please enter file name: ");
+		String fileName = this.getStringFromUser("Please enter file name: ");
 		File userFile = new File(fileName);
 		Scanner inFile = null;
 		try {
 			inFile = new Scanner(userFile);
+			System.out.println("Properties read: ");
 			while (inFile.hasNext()) {
 				String input = inFile.nextLine();
 				RealEstate currentProperty = this.createRealEstateObjectFromFileLine(input);
 				if (currentProperty != null) {
 					this.userRealEstateManager.addProperty(currentProperty);
+					System.out.println(currentProperty.toString());
+				} else {
+					System.out.println("\tInvalid property data read: " + input);
 				}
 			}
 			inFile.close();
@@ -141,10 +171,6 @@ public class RealEstateTUI {
 		} catch (NoSuchElementException nsee) {
 			System.out.println("Read past the end of the file");
 		}
-
-		System.out.println("Properties read: ");
-		System.out.println(this.userRealEstateManager.toString());
-
 	}
 
 	/**
@@ -178,32 +204,6 @@ public class RealEstateTUI {
 			theProperty = null;
 		}
 		return theProperty;
-	}
-
-	/**
-	 * Prompts user for a to enter a String based upon the message delivered in the
-	 * parameter. This method will continue to prompt the user for the String until
-	 * a String with at least 1 character is entered.
-	 * 
-	 * @return	String entered by user
-	 *
-	 * @precondition	none
-	 *	
-	 * @postcondition	no change to object
-	 */
-	private String getStringFromUser(String message) {
-		boolean isValid = false;
-		String fileName;
-		do {
-			System.out.println(message);
-			fileName = this.userInput.nextLine();
-			if (fileName.length() > 0) {
-				isValid = true;
-			} else {
-				System.out.println("You did not enter any text.  Please try again.");
-			}
-		} while (!isValid);
-		return fileName;
 	}
 
 }
