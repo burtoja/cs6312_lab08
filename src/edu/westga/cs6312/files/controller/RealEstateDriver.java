@@ -1,6 +1,3 @@
-/**
- * 
- */
 package edu.westga.cs6312.files.controller;
 
 import edu.westga.cs6312.files.model.RealEstateManager;
