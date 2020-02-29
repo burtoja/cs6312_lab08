@@ -56,7 +56,7 @@ public class RealEstateTUI {
 					this.addPropertiesFromFile();
 					break;
 				case 2:
-
+					this.displaySortedProperties();
 					break;
 				case 3:
 
@@ -112,17 +112,17 @@ public class RealEstateTUI {
 		} while (!isValid);
 		return userInteger;
 	}
-	
+
 	/**
 	 * Prompts user for a to enter a String based upon the message delivered in the
 	 * parameter. This method will continue to prompt the user for the String until
 	 * a String with at least 1 character is entered.
 	 * 
-	 * @return	String entered by user
+	 * @return String entered by user
 	 *
-	 * @precondition	none
-	 *	
-	 * @postcondition	no change to object
+	 * @precondition none
+	 * 
+	 * @postcondition no change to object
 	 */
 	private String getStringFromUser(String message) {
 		boolean isValid = false;
@@ -204,6 +204,21 @@ public class RealEstateTUI {
 			theProperty = null;
 		}
 		return theProperty;
+	}
+
+	/**
+	 * This private method will display the properties stored in the
+	 * RealEstateManager object in order of increasing land area with duplicate land
+	 * areas being sorted first by structure area and then sorted alphabetically by
+	 * location name for duplicates.
+	 * 
+	 * @precondition	none
+	 *
+	 * @postcondition	no change to object
+	 */
+	private void displaySortedProperties() {	
+		this.userRealEstateManager.sortProperties();
+		System.out.println(this.userRealEstateManager.toString());
 	}
 
 }

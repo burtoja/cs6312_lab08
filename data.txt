@@ -5,3 +5,7 @@ Humble Home, 4, 1
 All Words, four, one
 No House, 10, 0
 Good Location, 10, 3
+Alabama, 10, 30
+Colorado, 10, 4
+Delaware, 10, 5
+Georgia, 10, 5
