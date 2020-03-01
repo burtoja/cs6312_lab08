@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.PrintWriter;
 
 import edu.westga.cs6312.files.model.RealEstate;
 import edu.westga.cs6312.files.model.RealEstateManager;
@@ -53,13 +54,13 @@ public class RealEstateTUI {
 			userChoice = this.getIntegerFromUser("Please enter your choice from the menu: ");
 			switch (userChoice) {
 				case 1:
-					this.addPropertiesFromFile();
+					this.addPropertiesFromFile(this.getStringFromUser("Please enter input file name: "));
 					break;
 				case 2:
 					this.displaySortedProperties();
 					break;
 				case 3:
-
+					this.saveSortedProperties(this.getStringFromUser("Please enter output file name: "));
 					break;
 				case 4:
 					break;
@@ -144,12 +145,13 @@ public class RealEstateTUI {
 	 * user. File must be formatted with each entry on a separate line as follows:
 	 * property_name, land_area, structure_area i.e. "Shotgun Shack, 2, 1"
 	 * 
+	 * @param	fileName	the name of the file to be read into the object.  
+	 * 
 	 * @precondition
 	 *
 	 * @postcondition
 	 */
-	private void addPropertiesFromFile() {
-		String fileName = this.getStringFromUser("Please enter file name: ");
+	private void addPropertiesFromFile(String fileName) {		
 		File userFile = new File(fileName);
 		Scanner inFile = null;
 		try {
@@ -170,11 +172,12 @@ public class RealEstateTUI {
 			System.out.println("Data file does not exist");
 		} catch (NoSuchElementException nsee) {
 			System.out.println("Read past the end of the file");
+			inFile.close();
 		}
 	}
 
 	/**
-	 * PRivate helper method to create a new RealEstate object from a line of text
+	 * Private helper method to create a new RealEstate object from a line of text
 	 * where the location name, land area, and structure area are separated by a
 	 * comma and a space. The areas will only be considered if they are integers. If
 	 * all three pieces of data are unable to be parsed from the line, then a null
@@ -219,6 +222,29 @@ public class RealEstateTUI {
 	private void displaySortedProperties() {	
 		this.userRealEstateManager.sortProperties();
 		System.out.println(this.userRealEstateManager.toString());
+	}
+	
+	/**
+	 * 
+	 * @param fileName
+	 *
+	 * @precondition
+	 *
+	 * @postcondition
+	 */
+	private void saveSortedProperties(String fileName) {
+		this.userRealEstateManager.sortProperties();
+		File userFile = new File(fileName);
+		try {
+			PrintWriter outFile = new PrintWriter(userFile);
+			for (RealEstate currentProperty : this.userRealEstateManager.getProperties()) {
+				outFile.write(currentProperty.getLocation() + ", " + currentProperty.getLandArea() + ", " + currentProperty.getStructureArea() + System.getProperty("line.separator"));
+			}
+			outFile.close();
+			System.out.println("Property information successfully saved to file " + fileName);
+		} catch (FileNotFoundException fnfe){
+			System.out.println("There was a problem creating the file");
+		}
 	}
 
 }
