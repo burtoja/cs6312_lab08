@@ -23,7 +23,7 @@ public class RealEstateTUI {
 	private Scanner userInput;
 
 	/**
-	 * Constructor for RealEstateManager objects
+	 * Constructor for RealEstateTUI objects
 	 * 
 	 * @param userRealEstateManager the RealEstateManager object o be used in the
 	 *                              TUI
@@ -31,7 +31,8 @@ public class RealEstateTUI {
 	 * @precondition userRealEstateManager != null
 	 *
 	 * @postcondition new RealEstateManager object created with the
-	 *                RealEstateMAnager object provided in the parameter
+	 *                RealEstateMAnager object provided in the parameter and a
+	 *                Scanner object instantiated
 	 */
 	public RealEstateTUI(RealEstateManager userRealEstateManager) {
 		this.userRealEstateManager = userRealEstateManager;
@@ -141,17 +142,25 @@ public class RealEstateTUI {
 	}
 
 	/**
-	 * This method will add the real estate properties from a file supplied by the
-	 * user. File must be formatted with each entry on a separate line as follows:
-	 * property_name, land_area, structure_area i.e. "Shotgun Shack, 2, 1"
+	 * This method will add the real estate properties from a file supplied through
+	 * the parameter. File must be formatted with each entry on a separate line as
+	 * follows: property_name, land_area, structure_area i.e. "Shotgun Shack, 2, 1".
+	 * Each line will be read and a RealEstate object will be created from its data
+	 * if possible. This object will then be added to the list and a string
+	 * representation of that property will be displayed to the console. If the
+	 * formatting of the line of data in the file does not allow it to be parsed
+	 * correctly, then a report of the problem is generated for that line before
+	 * continuing to the next.
 	 * 
-	 * @param	fileName	the name of the file to be read into the object.  
+	 * @param fileName the name of the file to be read into the object.
 	 * 
-	 * @precondition
+	 * @precondition fileName must reference a valid file
 	 *
-	 * @postcondition
+	 * @postcondition new RealEstate objects are created for each successful entry
+	 *                and added to the userRealEstateManager list
+	 * 
 	 */
-	private void addPropertiesFromFile(String fileName) {		
+	private void addPropertiesFromFile(String fileName) {
 		File userFile = new File(fileName);
 		Scanner inFile = null;
 		try {
@@ -185,14 +194,15 @@ public class RealEstateTUI {
 	 * 
 	 * @param fileLine a properly formated comma separated String with location
 	 *                 (String), land area (int), and structure area (int)
+	 * 
 	 * @return a new RealEstate object (null if unable to parse data from supplied
 	 *         string)
 	 *
-	 * @precondition provided string must match format guidelines: comma separated
-	 *               with space following the comma, string location and integer
-	 *               areas
+	 * @precondition provided string must match format guidelines: "location_name,
+	 *               land_area, structure_area" (space following each comma)
 	 *
-	 * @postcondition new RealEstate object created
+	 * @postcondition new RealEstate object created with values from provided string
+	 *                (or null if unsuccessful parsing of string)
 	 */
 	private RealEstate createRealEstateObjectFromFileLine(String fileLine) {
 		RealEstate theProperty;
@@ -215,22 +225,27 @@ public class RealEstateTUI {
 	 * areas being sorted first by structure area and then sorted alphabetically by
 	 * location name for duplicates.
 	 * 
-	 * @precondition	none
+	 * @precondition none
 	 *
-	 * @postcondition	no change to object
+	 * @postcondition the data in the userRealEstateManager list of properties now
+	 *                sorted
 	 */
-	private void displaySortedProperties() {	
+	private void displaySortedProperties() {
 		this.userRealEstateManager.sortProperties();
 		System.out.println(this.userRealEstateManager.toString());
 	}
-	
+
 	/**
+	 * This method will create (or overwrite) a file with name matching provided
+	 * parameter and then write the current list (after being sorted) to the file
+	 * and save the file.
 	 * 
-	 * @param fileName
+	 * @param fileName the name of the file to be created (or overwritten)
 	 *
-	 * @precondition
+	 * @precondition fileName must be at least one character long
 	 *
-	 * @postcondition
+	 * @postcondition the data in the userRealEstateManager list of properties now
+	 *                sorted and is stored in a newly created (or overwritten) file
 	 */
 	private void saveSortedProperties(String fileName) {
 		this.userRealEstateManager.sortProperties();
@@ -238,11 +253,12 @@ public class RealEstateTUI {
 		try {
 			PrintWriter outFile = new PrintWriter(userFile);
 			for (RealEstate currentProperty : this.userRealEstateManager.getProperties()) {
-				outFile.write(currentProperty.getLocation() + ", " + currentProperty.getLandArea() + ", " + currentProperty.getStructureArea() + System.getProperty("line.separator"));
+				outFile.write(currentProperty.getLocation() + ", " + currentProperty.getLandArea() + ", "
+						+ currentProperty.getStructureArea() + System.getProperty("line.separator"));
 			}
 			outFile.close();
 			System.out.println("Property information successfully saved to file " + fileName);
-		} catch (FileNotFoundException fnfe){
+		} catch (FileNotFoundException fnfe) {
 			System.out.println("There was a problem creating the file");
 		}
 	}

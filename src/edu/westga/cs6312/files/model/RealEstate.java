@@ -32,7 +32,7 @@ public class RealEstate implements Comparable<RealEstate> {
 	 */
 	public RealEstate(String location, int landArea, int structureArea) {
 		if (location == null) {
-			throw new IllegalArgumentException("Month cannot be null.");
+			throw new IllegalArgumentException("Location cannot be null.");
 		}
 		if (location.length() < 2) {
 			throw new IllegalArgumentException("Location description must have at least two characters.");

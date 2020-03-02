@@ -55,12 +55,14 @@ public class RealEstateManager {
 	}
 	
 	/**
-	 * 
-	 * 
+	 * Sorts the properties stored in ascending order based upon the following hierarchy of criteria:
+	 * 1.) Land area
+	 * 2.) Structure area
+	 * 3.) Location name (alphabetically)
 	 *
-	 * @precondition
+	 * @precondition	none
 	 *
-	 * @postcondition
+	 * @postcondition	the listed properties stored in the object are now sorted
 	 */
 	public void sortProperties() {
 		Collections.sort(this.listedRealEstate);

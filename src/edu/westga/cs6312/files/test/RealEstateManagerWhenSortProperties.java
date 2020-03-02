@@ -2,8 +2,6 @@ package edu.westga.cs6312.files.test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.util.ArrayList;
-
 import org.junit.jupiter.api.Test;
 
 import edu.westga.cs6312.files.model.RealEstate;
@@ -41,7 +39,6 @@ public class RealEstateManagerWhenSortProperties {
 		theRealEstateManager.addProperty(theRealEstate2);
 		theRealEstateManager.addProperty(theRealEstate3);
 		theRealEstateManager.sortProperties();
-		ArrayList<RealEstate> realEstateList = theRealEstateManager.getProperties();
 		String report = theRealEstateManager.toString();
 		assertEquals(
 				"Current Real Estate Listings:\nLocation: Utah\tLand Area: 100 sq.ft.\tStructure Area: 500 sq.ft.\nLocation: Ohio\tLand Area: 300 sq.ft.\tStructure Area: 200 sq.ft.\nLocation: Idaho\tLand Area: 300 sq.ft.\tStructure Area: 400 sq.ft.\n",
@@ -70,7 +67,6 @@ public class RealEstateManagerWhenSortProperties {
 		theRealEstateManager.addProperty(theRealEstate2);
 		theRealEstateManager.addProperty(theRealEstate3);
 		theRealEstateManager.sortProperties();
-		ArrayList<RealEstate> realEstateList = theRealEstateManager.getProperties();
 		String report = theRealEstateManager.toString();
 		assertEquals(
 				"Current Real Estate Listings:\nLocation: Ohio\tLand Area: 200 sq.ft.\tStructure Area: 200 sq.ft.\nLocation: Idaho\tLand Area: 200 sq.ft.\tStructure Area: 400 sq.ft.\nLocation: Utah\tLand Area: 200 sq.ft.\tStructure Area: 500 sq.ft.\n",
@@ -99,7 +95,6 @@ public class RealEstateManagerWhenSortProperties {
 		theRealEstateManager.addProperty(theRealEstate2);
 		theRealEstateManager.addProperty(theRealEstate3);
 		theRealEstateManager.sortProperties();
-		ArrayList<RealEstate> realEstateList = theRealEstateManager.getProperties();
 		String report = theRealEstateManager.toString();
 		assertEquals(
 				"Current Real Estate Listings:\nLocation: Idaho\tLand Area: 200 sq.ft.\tStructure Area: 200 sq.ft.\nLocation: Ohio\tLand Area: 200 sq.ft.\tStructure Area: 200 sq.ft.\nLocation: Utah\tLand Area: 200 sq.ft.\tStructure Area: 200 sq.ft.\n",

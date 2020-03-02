@@ -1,4 +1,4 @@
-Shotgun Shack, 2, 1
+Shotgun Shack, 2, -1
 Yuge Estate, 1000, 20
 Bad Property
 Humble Home, 4, 1
