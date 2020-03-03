@@ -1,11 +1,14 @@
 Shotgun Shack, 2, -1
-Yuge Estate, 1000, 20
+Yuge Estate, 1000, 50.5
 Bad Property
 Humble Home, 4, 1
+A, 500, 150
+House TooBig, 100, 200
 All Words, four, one
 No House, 10, 0
 Good Location, 10, 3
 Alabama, 10, 30
 Colorado, 10, 4
 Delaware, 10, 5
+
 Georgia, 10, 5
