@@ -178,9 +178,9 @@ public class RealEstateTUI {
 			}
 			inFile.close();
 		} catch (FileNotFoundException fnfe) {
-			System.out.println("Data file does not exist");
+			System.out.println("Data file does not exist.  Returning to main menu.");
 		} catch (NoSuchElementException nsee) {
-			System.out.println("Read past the end of the file");
+			System.out.println("Read past the end of the file.");
 			inFile.close();
 		}
 	}
