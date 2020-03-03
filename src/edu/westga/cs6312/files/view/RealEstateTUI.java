@@ -215,6 +215,8 @@ public class RealEstateTUI {
 			theProperty = null;
 		} catch (NumberFormatException nfe) {
 			theProperty = null;
+		} catch (IllegalArgumentException iae) {
+			theProperty = null;
 		}
 		return theProperty;
 	}

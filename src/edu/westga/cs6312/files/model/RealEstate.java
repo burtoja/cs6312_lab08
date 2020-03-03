@@ -45,7 +45,7 @@ public class RealEstate implements Comparable<RealEstate> {
 		}
 		this.location = location;
 		this.landArea = landArea;
-		this.structureArea = structureArea;
+		this.addStructureArea(structureArea);
 	}
 
 	/**
