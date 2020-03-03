@@ -255,8 +255,7 @@ public class RealEstateTUI {
 		try {
 			PrintWriter outFile = new PrintWriter(userFile);
 			for (RealEstate currentProperty : this.userRealEstateManager.getProperties()) {
-				outFile.write(currentProperty.getLocation() + ", " + currentProperty.getLandArea() + ", "
-						+ currentProperty.getStructureArea() + System.getProperty("line.separator"));
+				outFile.write(currentProperty.toString() + System.getProperty("line.separator"));
 			}
 			outFile.close();
 			System.out.println("Property information successfully saved to file " + fileName);
